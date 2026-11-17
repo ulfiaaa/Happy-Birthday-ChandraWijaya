@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Ulang Tahun</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #101820;
+    --card: #1b2732;
+    --text: #f2f0eb;
+    --muted: #a8b1b9;
+    --accent: #a9bdca;
+    --border: rgba(255,255,255,.10);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #293b49 0%, transparent 45%),
+        var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 15px;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* HALAMAN PEMBUKA */
+#opening {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #101820;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 25px;
+}
+
+.opening-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.opening-content p {
+    color: var(--muted);
+    margin-bottom: 28px;
+    font-size: 13px;
+}
+
+.enter-btn {
+    padding: 13px 30px;
+    background: var(--accent);
+    color: #101820;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
+/* KONTEN UTAMA */
+.container {
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    padding: 35px 23px;
+    background: rgba(27,39,50,.92);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.small-heading {
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 17px;
+}
+
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 39px;
+    line-height: 1.2;
+    margin-bottom: 13px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.line {
+    width: 45px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 27px;
+}
+
+/* TOMBOL */
+.button-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+}
+
+.message-btn {
+    padding: 14px 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.04);
+    color: var(--text);
+    border-radius: 12px;
+    font-size: 12px;
+    transition: .2s;
+}
+
+.message-btn:hover {
+    background: rgba(169,189,202,.15);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.gift-btn {
+    grid-column: span 2;
+    background: var(--accent);
+    color: #101820;
+    font-weight: 700;
+    border: none;
+}
+
+.footer {
+    color: #75838e;
+    font-size: 10px;
+    margin-top: 27px;
+    letter-spacing: 1px;
+}
+
+/* TOMBOL MUSIK */
+.music-btn {
+    position: fixed;
+    bottom: 18px;
+    right: 18px;
+    background: #293b49;
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 11px 16px;
+    font-size: 11px;
+    z-index: 5;
+}
+
+/* POPUP */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    background: rgba(0,0,0,.75);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 380px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: #1b2732;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 22px;
+    text-align: center;
+    position: relative;
+    animation: appear .25s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 23px;
+}
+
+.modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    margin: 10px 0 18px;
+}
+
+.modal-text {
+    color: #c1cbd2;
+    font-size: 13px;
+    line-height: 1.9;
+    white-space: pre-line;
+}
+
+/* FOTO MASA KECIL */
+.single-memory {
+    text-align: center;
+}
+
+.childhood-photo {
+    width: 100%;
+    max-width: 230px;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 13px;
+    margin: 0 auto 20px;
+    display: block;
+    border: 1px solid var(--border);
+}
+
+.memory-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--accent);
+    margin-bottom: 17px;
+    font-style: italic;
+}
+
+.memory-message {
+    color: #c1cbd2;
+    font-size: 12px;
+    line-height: 2;
+    white-space: pre-line;
+}
+
+.memory-ending {
+    color: var(--accent);
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* HADIAH QR CODE */
+.gift-image {
+    width: 100%;
+    max-width: 230px;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    margin: 10px auto 18px;
+    display: block;
+}
+
+.gift-note {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* TAMPILAN HP */
+@media (max-width: 360px) {
+    .main-title {
+        font-size: 33px;
+    }
+
+    .container {
+        padding: 30px 17px;
+    }
+
+    .message-btn {
+        font-size: 11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HALAMAN PEMBUKA -->
+<div id="opening">
+    <div class="opening-content">
+        <h1>Ada sesuatu<br>untukmu.</h1>
+        <p>Sebuah kejutan kecil di hari spesialmu.</p>
+
+        <button class="enter-btn" onclick="enterWebsite()">
+            Buka Kejutan
+        </button>
+    </div>
+</div>
+
+<!-- MUSIK -->
+<audio id="bgMusic" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicToggle" onclick="toggleMusic()">
+    ♫ Musik ON
+</button>
+
+<!-- KONTEN UTAMA -->
+<main class="container">
+
+    <p class="small-heading">Hari yang spesial</p>
+
+    <h1 class="main-title">Selamat<br>Ulang Tahun<br>Sayangku.</h1>
+
+    <p class="subtitle">
+        Bertambah satu tahun, bertambah satu cerita.<br>
+        Ada sedikit sesuatu yang ingin disampaikan.
+    </p>
+
+    <div class="line"></div>
+
+    <div class="button-grid">
+
+        <button class="message-btn" onclick="openMessage('wish')">
+            Ucapan Ulang Tahun
+        </button>
+
+        <button class="message-btn" onclick="openMessage('letter')">
+            Sepucuk Surat
+        </button>
+
+        <button class="message-btn" onclick="openMessage('prayers')">
+            Doa Untukmu
+        </button>
+
+        <button class="message-btn" onclick="openMessage('reminder')">
+            Pengingat Kecil
+        </button>
+
+        <button class="message-btn" onclick="openMessage('memories')">
+            Tentang Masa Kecil
+        </button>
+
+        <button class="message-btn" onclick="openMessage('day')">
+            Hari Ini Untukmu
+        </button>
+
+        <button class="message-btn" onclick="openMessage('secret')">
+            Pesan Rahasia
+        </button>
+
+        <button class="message-btn" onclick="openMessage('last')">
+            Satu Hal Lagi
+        </button>
+
+        <button class="message-btn gift-btn" onclick="openMessage('gift')">
+            🎁 Hadiah Kecil Untukmu
+        </button>
+
+    </div>
+
+    <p class="footer">DIBUAT DENGAN SEPENUH HATI · OLEH ULFIAAAA</p>
+
+</main>
+
+<!-- POPUP PESAN -->
+<div class="modal" id="messageModal" onclick="closeOutside(event)">
+    <div class="modal-content">
+
+        <button class="close-btn" onclick="closeModal()">×</button>
+
+        <h2 class="modal-title" id="modalTitle"></h2>
+
+        <div class="modal-text" id="modalText"></div>
+
+    </div>
+</div>
+
+<script>
+const audio = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+
+/* PEMBUKA WEBSITE */
+async function enterWebsite() {
+    document.getElementById("opening").style.display = "none";
+
+    try {
+        await audio.play();
+        musicToggle.textContent = "♫ Musik ON";
+    } catch (error) {
+        musicToggle.textContent = "♫ Musik OFF";
+        console.log("Musik gagal diputar:", error);
+    }
+}
+
+/* KONTROL MUSIK */
+async function toggleMusic() {
+    if (audio.paused) {
+        try {
+            await audio.play();
+            musicToggle.textContent = "♫ Musik ON";
+        } catch (error) {
+            alert("Musik belum bisa diputar.");
+        }
+    } else {
+        audio.pause();
+        musicToggle.textContent = "♫ Musik OFF";
+    }
+}
+
+/* SEMUA PESAN */
+const messages = {
+
+    wish: {
+        title: "Selamat Ulang Tahun",
+        text: `Selamat bertambah usia!
+
+Semoga di umur yang baru ini, semakin banyak
+hal baik yang datang dalam hidupmu.
+
+Semoga apa pun yang sedang kamu usahakan
+bisa menemukan jalannya, dan apa pun yang
+sedang kamu tunggu bisa datang di waktu terbaik.
+
+Jangan lupa bahagia, ya.
+Hari ini adalah harimu.`
+    },
+
+    letter: {
+        title: "Sepucuk Surat",
+        text: `Mungkin aku nggak selalu punya kata-kata
+yang tepat buat disampaikan.
+
+Tapi aku harap kamu tahu bahwa kamu pantas
+mendapatkan banyak hal baik dalam hidup.
+
+Terima kasih sudah bertahan sampai sejauh ini.
+Terima kasih sudah terus mencoba,
+meskipun terkadang semuanya tidak mudah.
+
+Semoga perjalanan ke depan jauh lebih indah.
+I LOVE YOU SAYANGKU CINTAKU<3`
+    },
+
+    prayers: {
+        title: "Doa Untukmu",
+        text: `Semoga selalu diberi kesehatan,
+umur yang berkah, dan hati yang tenang.
+
+Semoga setiap langkahmu dimudahkan,
+setiap urusanmu dilancarkan,
+dan setiap impianmu perlahan menjadi nyata.
+
+Semoga kamu selalu dikelilingi orang-orang
+yang tulus, semoga ninjanya cepet jadi
+ninja ag style, alumunium mahal.
+
+Aamiin paling serius.`
+    },
+
+    reminder: {
+        title: "Pengingat Kecil",
+        text: `Jangan terlalu keras sama diri sendiri, ya.
+
+Kamu nggak harus selalu kuat.
+Kamu nggak harus selalu tau apa yang harus
+dilakukan.
+
+Gapapa banget kalau sesekali ngerasa capek, marah,
+bahkan nangis gapapa banget normalnya manusia.
+Jangan apa-apa dipendem sendiri ya.
+
+Akupun minta maaf belum bisa jadi pendengar yang baik
+buat kamu, aku berusaha jadi lebih baik lagi!!!`
+    },
+
+    memories: {
+        title: "Untuk Dirimu yang Dulu",
+
+        html: `
+            <div class="single-memory">
+
+                <img
+                    src="photos/masa-kecil.jpg"
+                    alt="Foto masa kecil"
+                    class="childhood-photo"
+                >
+
+                <p class="memory-quote">
+                    "Lihat deh kamu yang ini.
+                    Diwaktu ini banyak hal yang belum kamu tau
+                    tentang perjalanan hidupmu."
+                </p>
+
+                <p class="memory-message">
+                    Seandainya anak kecil di foto ini tau
+                    sejauh apa dirinya akan melangkah.
+
+                    Bahwa akan ada banyak cerita,
+                    banyak tawa, banyak kecewa,
+                    dan hal-hal yang harus dilewati
+                    untuk sampai di titik sekarang.
+
+                    Mungkin nggak semuanya mudah.
+                    Mungkin ada hari-hari ketika kamu merasa
+                    lelah dan ingin menyerah.
+
+                    Tapi lihat deh, kamu berhasil loh tumbuh
+                    dan sampai sejauh ini.
+
+                    Semoga kamu nggak pernah kehilangan
+                    kebahagiaan kecil yang dulu kamu punya.
+
+                    Jangan lupa buat sayangi dirimu sendiri,
+                    seperti kamu menyayangi orang lain, menyayangi AKU haha.
+
+                    Aku bangga banget sama kamu yang sekarang,
+                    dan semoga dirimu yang kecil juga
+                    akan bangga melihatmu hari ini.
+                </p>
+
+                <p class="memory-ending">
+                    Untuk anak kecil yang sudah tumbuh dewasa. ♡
+                </p>
+
+            </div>
+        `
+    },
+
+    day: {
+        title: "Hari Ini Untukmu",
+        text: `Hari ini, jangan terlalu memikirkan
+hal-hal yang membuatmu pusing.
+
+Nikmati harimu, makan makanan enak,
+tertawalah sebanyak-banyaknya,
+dan buat kenangan yang menyenangkan.
+
+Semoga hari ini menjadi salah satu
+hari yang ingin kamu ingat.`
+    },
+
+    secret: {
+        title: "Pesan Rahasia",
+        text: `Ada satu hal yang mau aku sampaikan...
+
+Mungkin ini udah basic banget, tapi...
+aku sayang banget sama kamu, aku beruntung banget
+bisa kenal sama kamu tentunya, aku seneng deket sama kamu.
+
+Tiap malam aku kadang mikir kalo kamu pergi dari aku
+aku gak bisa bayangin gimna stress nya aku nanti, jadi gila kali ya..
+lebay, tp emang bener:D
+
+Aku sadar aku masih banyak egois sama kamu, aku bakal belajar lagi
+untuk menghargai kamu, menghormati kamu.
+
+Tetep jadi dirimu sendiri,
+karena ada banyak hal baik dari dirimu
+yang mungkin belum kamu sadari.`
+    },
+
+    last: {
+        title: "Satu Hal Lagi",
+        text: `Kalau suatu hari nanti hidup terasa berat,
+semoga kamu ingat bahwa kamu pernah
+melewati banyak hal dan berhasil bertahan.
+
+Terus tumbuh, teruslah belajar,
+dan jangan takut dengan hal-hal baru.
+
+Nggak perlu menjadi sempurna.
+Cukup menjadi lebih baik dari dirimu kemarin.
+
+Sekali lagi, selamat ulang tahun.
+Semoga bahagia selalu menyertaimu.`
+    },
+
+    gift: {
+        title: "Hadiah Kecil Untukmu 🎁",
+
+        html: `
+            <img
+                src="photos/qr-code.png"
+                class="gift-image"
+                alt="QR Code hadiah"
+            >
+
+            <p class="gift-note">
+                Ada sesuatu yang menunggumu di sana.
+
+                Coba pindai QR ini, ya.
+                Aku minta maaf belum bisa ngasih kamu apa-apa
+                Semoga kamu suka hadiah kecilnya. ♡
+            </p>
+        `
+    }
+};
+
+/* MEMBUKA POPUP */
+function openMessage(type) {
+    const message = messages[type];
+
+    document.getElementById("modalTitle").textContent =
+        message.title;
+
+    const content = document.getElementById("modalText");
+
+    if (message.html) {
+        content.innerHTML = message.html;
+    } else {
+        content.textContent = message.text;
+    }
+
+    document.getElementById("messageModal").classList.add("show");
+}
+
+/* MENUTUP POPUP */
+function closeModal() {
+    document.getElementById("messageModal").classList.remove("show");
+}
+
+/* MENUTUP JIKA KLIK DI LUAR KOTAK */
+function closeOutside(event) {
+    if (event.target.id === "messageModal") {
+        closeModal();
+    }
+}
+
+/* TUTUP DENGAN TOMBOL ESC */
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        closeModal();
+    }
+});
+</script>
+
+</body>
+</html>
